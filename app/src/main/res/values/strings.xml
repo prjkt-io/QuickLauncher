@@ -4,7 +4,7 @@
     <string name="notification_channel">Quick Launch Configuration (DO NOT DISABLE)</string>
     <string name="notification_channel_desc">DO NOT DISABLE THIS OR YOU WILL BE UNABLE TO CHANGE YOUR QUICK LAUNCH APP!</string>
 
-    <string name="dialog_title">QuickLauncher: Pick an app</string>
+    <string name="dialog_title">Select an app to use as Home</string>
 
     <string name="notification_title">Quick Launcher Configurator</string>
     <string name="notification_summary">Keep this notification to quickly switch between your apps</string>

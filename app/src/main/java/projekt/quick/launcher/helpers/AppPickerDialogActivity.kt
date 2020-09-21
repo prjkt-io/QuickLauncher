@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import projekt.quick.launcher.R
 import projekt.quick.launcher.adapters.InstalledAppAdapter
 import projekt.quick.launcher.adapters.InstalledAppItemModel
+import projekt.quick.launcher.helpers.Configurator.killNotificationShade
 import java.util.*
 
 class AppPickerDialogActivity : Activity() {
@@ -22,7 +23,8 @@ class AppPickerDialogActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        killNotificationShade(this)
 
         val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val customLayout: View = inflater.inflate(R.layout.app_picker_dialog, null)
@@ -59,7 +61,7 @@ class AppPickerDialogActivity : Activity() {
 
         // create and show the alert dialog
         shownDialog = builder.create()
-        shownDialog?.setCancelable(true)
+        shownDialog?.setCancelable(false)
         shownDialog?.show()
     }
 

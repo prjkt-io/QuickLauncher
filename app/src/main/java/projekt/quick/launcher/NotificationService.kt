@@ -67,7 +67,7 @@ class NotificationService : Service() {
         val largeIconBitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_notifications_icon)
         builder.setLargeIcon(largeIconBitmap)
 
-        builder.priority = NotificationManager.IMPORTANCE_LOW
+        builder.priority = NotificationManager.IMPORTANCE_MIN
         builder.setFullScreenIntent(pendingIntent, true)
 
         // Add Settings button intent in notification.

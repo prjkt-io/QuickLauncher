@@ -12,7 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         launchApp()
-        finish()
     }
 
     private fun launchApp() {
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+        finish()
     }
 
     override fun onResume() {

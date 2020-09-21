@@ -7,18 +7,18 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import projekt.quick.launcher.R
 import projekt.quick.launcher.adapters.InstalledAppAdapter
 import projekt.quick.launcher.adapters.InstalledAppItemModel
-import java.util.ArrayList
+import java.util.*
 
 class AppPickerDialogActivity : Activity() {
+
+    private var shownDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class AppPickerDialogActivity : Activity() {
         val customLayout: View = inflater.inflate(R.layout.app_picker_dialog, null)
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Pick an app")
+        builder.setTitle(getString(R.string.dialog_title))
 
         val installedAppItemModels: ArrayList<InstalledAppItemModel> = ArrayList<InstalledAppItemModel>()
 
@@ -58,8 +58,13 @@ class AppPickerDialogActivity : Activity() {
         builder.setView(customLayout)
 
         // create and show the alert dialog
-        val shownDialog = builder.create()
+        shownDialog = builder.create()
         shownDialog?.setCancelable(true)
         shownDialog?.show()
+    }
+
+    override fun onDestroy() {
+        shownDialog?.dismiss()
+        super.onDestroy()
     }
 }

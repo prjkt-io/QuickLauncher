@@ -1,6 +1,5 @@
 package projekt.quick.launcher.adapters
 
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -14,6 +13,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import projekt.quick.launcher.R
+import projekt.quick.launcher.helpers.Configurator
+import projekt.quick.launcher.helpers.Configurator.APP_LAUNCH_PREF
 import java.util.*
 
 class InstalledAppAdapter(private val mContext: Context, private val installedAppItemModels: ArrayList<InstalledAppItemModel>) : RecyclerView.Adapter<InstalledAppAdapter.ViewHolder>() {
@@ -28,6 +29,12 @@ class InstalledAppAdapter(private val mContext: Context, private val installedAp
         val (appName, packageName) = installedAppItemModels[position]
         holder.titleView.text = appName
         holder.mainIcon.setImageDrawable(getAppIcon(mContext, packageName))
+        holder.cardView.setOnClickListener {
+            run {
+                Configurator.quickLauncherPrefs?.edit()?.putString(APP_LAUNCH_PREF, packageName)?.apply()
+                Configurator.shownDialog?.dismiss()
+            }
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

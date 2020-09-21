@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import android.view.LayoutInflater
@@ -19,6 +20,9 @@ import java.util.*
 object Configurator {
 
     var BROADCAST_DIALOG_OPEN : String = "projekt.quick.launcher.notification.DIALOG_OPEN"
+    var APP_LAUNCH_PREF : String = "launch_app"
+    var quickLauncherPrefs: SharedPreferences? = null
+    var shownDialog: AlertDialog? = null
 
     fun launchAppPickerDialog(activity: Activity) {
         val inflater: LayoutInflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -55,9 +59,9 @@ object Configurator {
         builder.setView(customLayout)
 
         // create and show the alert dialog
-        val installedAppsDialog = builder.create()
-        installedAppsDialog.setCancelable(true)
-        installedAppsDialog.show()
+        shownDialog = builder.create()
+        shownDialog?.setCancelable(true)
+        shownDialog?.show()
     }
 
 }

@@ -1,5 +1,6 @@
 package projekt.quick.launcher.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -17,7 +18,7 @@ import projekt.quick.launcher.helpers.Configurator
 import projekt.quick.launcher.helpers.Configurator.APP_LAUNCH_PREF
 import java.util.*
 
-class InstalledAppAdapter(private val mContext: Context, private val installedAppItemModels: ArrayList<InstalledAppItemModel>) : RecyclerView.Adapter<InstalledAppAdapter.ViewHolder>() {
+class InstalledAppAdapter(private val mActivity: Activity, private val installedAppItemModels: ArrayList<InstalledAppItemModel>) : RecyclerView.Adapter<InstalledAppAdapter.ViewHolder>() {
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.installed_app_item, parent, false)
@@ -28,11 +29,11 @@ class InstalledAppAdapter(private val mContext: Context, private val installedAp
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (appName, packageName) = installedAppItemModels[position]
         holder.titleView.text = appName
-        holder.mainIcon.setImageDrawable(getAppIcon(mContext, packageName))
+        holder.mainIcon.setImageDrawable(getAppIcon(mActivity, packageName))
         holder.cardView.setOnClickListener {
             run {
                 Configurator.quickLauncherPrefs?.edit()?.putString(APP_LAUNCH_PREF, packageName)?.apply()
-                Configurator.shownDialog?.dismiss()
+                mActivity.finish()
             }
         }
     }

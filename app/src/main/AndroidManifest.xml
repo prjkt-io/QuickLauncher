@@ -3,6 +3,7 @@
     package="projekt.quick.launcher">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".QuickLauncher"
@@ -20,11 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".helpers.AppPickerDialogActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/DialogPicker" />
 
         <service
             android:name=".NotificationService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

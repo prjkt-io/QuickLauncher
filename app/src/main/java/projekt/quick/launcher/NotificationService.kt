@@ -5,11 +5,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.graphics.BitmapFactory
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import projekt.quick.launcher.helpers.Configurator.BROADCAST_DIALOG_OPEN
+import projekt.quick.launcher.helpers.AppPickerDialogActivity
 
 
 class NotificationService : Service() {
@@ -27,9 +28,9 @@ class NotificationService : Service() {
                 stopForegroundService()
             }
             ACTION_SETTINGS -> {
-                val broadcastIntent = Intent()
-                broadcastIntent.action = BROADCAST_DIALOG_OPEN
-                applicationContext.sendBroadcast(broadcastIntent)
+                val dialogIntent = Intent(this, AppPickerDialogActivity::class.java)
+                dialogIntent.addFlags(FLAG_ACTIVITY_NEW_TASK)
+                startActivity(dialogIntent)
             }
         }
         return super.onStartCommand(intent, flags, startId)

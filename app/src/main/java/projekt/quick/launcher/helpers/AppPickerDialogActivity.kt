@@ -9,6 +9,7 @@ import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import projekt.quick.launcher.R
@@ -65,6 +66,7 @@ class AppPickerDialogActivity : Activity() {
         shownDialog = builder.create()
         shownDialog?.setCancelable(false)
         shownDialog?.show()
+        shownDialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     override fun onDestroy() {

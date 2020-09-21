@@ -12,6 +12,6 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="DialogPicker" parent="@style/Theme.AppCompat.Dialog.Alert" />
+    <style name="DialogPicker" parent="@style/Theme.AppCompat" />
 
 </resources>

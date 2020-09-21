@@ -2,7 +2,9 @@ package projekt.quick.launcher.helpers
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+
 
 object Configurator {
 
@@ -20,6 +22,12 @@ object Configurator {
         } catch (ignored: Exception) {
             false
         }
+    }
+
+    fun Context.isDefaultHomeApp(): Boolean {
+        val intent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
+        val res = packageManager.resolveActivity(intent, 0)
+        return res!!.activityInfo != null && packageName == res.activityInfo.packageName
     }
 
 }

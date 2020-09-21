@@ -1,8 +1,11 @@
 package projekt.quick.launcher.adapters
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.*
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import projekt.quick.launcher.R
 import projekt.quick.launcher.helpers.Configurator
 import projekt.quick.launcher.helpers.Configurator.APP_LAUNCH_PREF
+import projekt.quick.launcher.helpers.Configurator.isDefaultHomeApp
+import projekt.quick.launcher.helpers.DummyActivity
 import java.util.*
+
 
 class InstalledAppAdapter(private val mActivity: Activity, private val installedAppItemModels: ArrayList<InstalledAppItemModel>) : RecyclerView.Adapter<InstalledAppAdapter.ViewHolder>() {
     // Create new views (invoked by the layout manager)
@@ -31,7 +37,23 @@ class InstalledAppAdapter(private val mActivity: Activity, private val installed
         holder.mainIcon.setImageDrawable(getAppIcon(mActivity, packageName))
         holder.cardView.setOnClickListener {
             run {
+                val selected = Configurator.quickLauncherPrefs?.getString(APP_LAUNCH_PREF, packageName)
                 Configurator.quickLauncherPrefs?.edit()?.putString(APP_LAUNCH_PREF, packageName)?.apply()
+
+                if (selected?.isNotEmpty()!! && !mActivity.applicationContext.isDefaultHomeApp()) {
+                    val pm: PackageManager = mActivity.packageManager
+                    val name = ComponentName(mActivity, DummyActivity::class.java)
+                    pm.setComponentEnabledSetting(name, COMPONENT_ENABLED_STATE_ENABLED, DONT_KILL_APP)
+
+                    // show selector
+                    val intent = Intent(Intent.ACTION_MAIN)
+                    intent.addCategory(Intent.CATEGORY_HOME)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    mActivity.startActivity(intent)
+
+                    pm.setComponentEnabledSetting(name, COMPONENT_ENABLED_STATE_DEFAULT, DONT_KILL_APP)
+                }
+
                 mActivity.finish()
             }
         }

@@ -3,7 +3,6 @@ package projekt.quick.launcher.helpers
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 
 object Configurator {
 
@@ -18,8 +17,7 @@ object Configurator {
             val collapse = statusBarManager.getMethod("collapsePanels")
             collapse.invoke(service)
             true
-        } catch (e: Exception) {
-            Log.e("QuickLauncher", "Exception raised in collapsePanels() -> " + e.message)
+        } catch (ignored: Exception) {
             false
         }
     }

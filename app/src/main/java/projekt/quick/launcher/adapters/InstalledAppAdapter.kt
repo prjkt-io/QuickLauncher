@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,8 +71,7 @@ class InstalledAppAdapter(private val mActivity: Activity, private val installed
         fun getAppName(context: Context, packageName: String): String {
             try {
                 return context.packageManager.getApplicationLabel(context.packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)) as String
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to get app name for \"$packageName\", falling back to default")
+            } catch (ignored: Exception) {
             }
             return packageName
         }
@@ -82,8 +80,7 @@ class InstalledAppAdapter(private val mActivity: Activity, private val installed
                        packageName: String): Drawable? {
             try {
                 return context.packageManager.getApplicationIcon(packageName)
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to get app icon for \"$packageName\", falling back to default")
+            } catch (ignored: Exception) {
             }
             return ContextCompat.getDrawable(context, R.mipmap.ic_launcher)
         }

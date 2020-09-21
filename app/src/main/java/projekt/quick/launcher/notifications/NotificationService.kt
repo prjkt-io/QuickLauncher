@@ -1,4 +1,4 @@
-package projekt.quick.launcher
+package projekt.quick.launcher.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,8 +8,8 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.graphics.BitmapFactory
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
+import projekt.quick.launcher.R
 import projekt.quick.launcher.helpers.AppPickerDialogActivity
 
 
@@ -38,8 +38,6 @@ class NotificationService : Service() {
 
     /* Used to build and start foreground service. */
     private fun startForegroundService() {
-        Log.d(TAG, "Starting foreground service...")
-
         val channelId = "quickLauncher_settings"
         val name = getString(R.string.notification_channel)
         val description = getString(R.string.notification_channel_desc)
@@ -85,12 +83,7 @@ class NotificationService : Service() {
     }
 
     private fun stopForegroundService() {
-        Log.d(TAG, "Stopping foreground service...")
-
-        // Stop foreground service and remove the notification.
         stopForeground(true)
-
-        // Stop the foreground service.
         stopSelf()
     }
 

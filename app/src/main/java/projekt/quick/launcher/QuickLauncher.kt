@@ -3,6 +3,7 @@ package projekt.quick.launcher
 import android.app.Application
 import android.content.Intent
 import projekt.quick.launcher.helpers.Configurator.quickLauncherPrefs
+import projekt.quick.launcher.notifications.NotificationService
 
 class QuickLauncher : Application() {
 

@@ -45,8 +45,10 @@ class AppPickerDialogActivity : Activity() {
             val appName = InstalledAppAdapter.getAppName(this, applicationInfo.packageName)
             val packageName = applicationInfo.packageName
 
-            val installedAppItemModel = InstalledAppItemModel(appName, packageName)
-            installedAppItemModels.add(installedAppItemModel)
+            if (packageName != getPackageName()) {
+                val installedAppItemModel = InstalledAppItemModel(appName, packageName)
+                installedAppItemModels.add(installedAppItemModel)
+            }
         }
 
         val mMenuItems: RecyclerView

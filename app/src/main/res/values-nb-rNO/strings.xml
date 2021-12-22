@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Hurtigoppstarter</string>
+
+    <string name="notification_channel">Hurtigoppstartsoppsett (IKKE SKRU AV)</string>
+    <string name="notification_channel_desc">Hvis du skrur av dette vil du ikke kunne endre hurtigoppstartsprogram!</string>
+
+    <string name="dialog_title">Velg et hjemmeprogram</string>
+
+    <string name="notification_title">Hurtigoppstarter-oppsett</string>
+    <string name="notification_summary">Vedvarende merknad for å bytte mellom programmer raskt</string>
+    <string name="notification_button">Sett opp</string>
+</resources>
